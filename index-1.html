@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Grid</title>
+    <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #1C1C1E;
+      color: #ffffff;
+      overflow: hidden;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .instruction {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.5rem;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      user-select: none;
+      pointer-events: none;
+      text-align: center;
+      z-index: 10;
+      opacity: 0.1;
+      transition: text-shadow 0.5s ease, opacity 0.5s ease;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="grid"></canvas>
+    <div class="instruction">Explore</div>
+
+    <script>
+    const canvas = document.getElementById("grid");
+    const ctx = canvas.getContext("2d");
+    const instructionEl = document.querySelector(".instruction");
+
+    let width, height, cols, rows;
+    const SQ = 40;
+
+    let mouse = { x: -9999, y: -9999 };
+    let mouseActive = false;
+    const ripples = [];
+
+    function init() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      cols = Math.ceil(width / SQ);
+      rows = Math.ceil(height / SQ);
+    }
+
+    // Noise function for organic wave
+    function noise(x, y, t) {
+      return (
+        Math.sin(x * 0.0137 + t * 0.22 + 1.3) * 0.5 +
+        Math.sin(y * 0.0171 + t * 0.17 + 2.7) * 0.5 +
+        Math.sin((x * 0.73 - y * 0.67) * 0.011 + t * 0.28 + 4.1) * 0.6 +
+        Math.sin((x * 0.31 + y * 0.95) * 0.019 + t * 0.12 + 0.8) * 0.4
+      ) / 2.0;
+    }
+
+    // Diagonal fade: 1 at top-right, 0 at bottom-left
+    function diagonalFade(x, y) {
+      // Normalized position: 0 at top-right, 1 at bottom-left
+      const nx = 1 - (x / width);  // 1 at left, 0 at right
+      const ny = y / height;        // 0 at top, 1 at bottom
+      // Combine: 0 at top-right, 2 at bottom-left
+      const d = (nx + ny) / 2;      // normalize to 0-1
+      // Fade: full at top-right (d=0), gone at center-ish (d ~0.4-0.5)
+      const fade = 1 - Math.min(d / 0.65, 1);
+      return Math.pow(fade, 1.2);
+    }
+
+    window.addEventListener("resize", init);
+
+    window.addEventListener("mousemove", (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouseActive = true;
+    });
+
+    window.addEventListener("mouseleave", () => { mouseActive = false; });
+
+    window.addEventListener("click", (e) => {
+      ripples.push({ x: e.clientX, y: e.clientY, r: 0, a: 0.7 });
+    });
+
+    function frame() {
+      ctx.clearRect(0, 0, width, height);
+      const time = Date.now() * 0.001;
+
+      // Breathing pulse
+      const pulse = 0.82 + 0.18 * Math.sin(time * 2.0);
+
+      // Mouse hover
+      const mR = 280;
+
+      // Draw grid
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * SQ;
+          const y = row * SQ;
+          const cx = x + SQ / 2;
+          const cy = y + SQ / 2;
+
+          // Diagonal fade mask
+          const fade = diagonalFade(cx, cy);
+          if (fade < 0.005) continue;
+
+          // Wave value
+          const n = noise(x, y, time);
+          let waveAlpha = 0;
+          if (n > 0.2 && n < 0.55) {
+            const bandCenter = 0.375;
+            const bandWidth = 0.175;
+            waveAlpha = 1 - Math.abs(n - bandCenter) / bandWidth;
+            waveAlpha = Math.pow(Math.max(0, waveAlpha), 1.2) * 0.9;
+          }
+
+          let alpha = waveAlpha * fade;
+
+          // Mouse hover glow (global, no fade mask)
+          if (mouseActive) {
+            const mdx = cx - mouse.x;
+            const mdy = cy - mouse.y;
+            const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (mDist < mR) {
+              const mAlpha = Math.pow(1 - mDist / mR, 2) * 0.35;
+              alpha += mAlpha;
+            }
+          }
+
+          // Click ripples
+          for (const rp of ripples) {
+            const rdx = cx - rp.x;
+            const rdy = cy - rp.y;
+            const rDist = Math.sqrt(rdx * rdx + rdy * rdy);
+            const ringW = 50;
+            if (rDist > rp.r - ringW && rDist < rp.r + ringW) {
+              const ringDist = Math.abs(rDist - rp.r) / ringW;
+              const s = (1 - ringDist) * rp.a * 0.4;
+              alpha += s;
+            }
+          }
+
+          alpha = Math.min(alpha, 1) * pulse;
+
+          if (alpha > 0.008) {
+            // Subtle fill
+            ctx.fillStyle = `rgba(29,106,90,${alpha * 0.12})`;
+            ctx.fillRect(x + 1, y + 1, SQ - 2, SQ - 2);
+
+            // Stroke with gradient
+            const grad = ctx.createRadialGradient(cx, cy, 2, cx, cy, SQ * 1.0);
+            grad.addColorStop(0, `rgba(29,106,90,${alpha})`);
+            grad.addColorStop(1, `rgba(29,106,90,0)`);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 1.3;
+            ctx.strokeRect(x + 0.5, y + 0.5, SQ - 1, SQ - 1);
+          }
+        }
+      }
+
+      // Update ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        ripples[i].r += 3.5;
+        ripples[i].a -= 0.006;
+        if (ripples[i].a <= 0) ripples.splice(i, 1);
+      }
+
+      // Instruction text glow when mouse is near center
+      const ccx = width / 2, ccy = height / 2;
+      if (mouseActive) {
+        const d = Math.sqrt((mouse.x - ccx) ** 2 + (mouse.y - ccy) ** 2);
+        const t = Math.max(0, 1 - d / 400);
+        if (t > 0.05) {
+          const blur = 10 + t * 40;
+          instructionEl.style.textShadow =
+            `0 0 ${blur}px rgba(29,106,90,${t * 0.9}), 0 0 ${blur * 2}px rgba(29,106,90,${t * 0.4})`;
+          instructionEl.style.opacity = 0.1 + t * 0.9;
+        } else {
+          instructionEl.style.textShadow = 'none';
+          instructionEl.style.opacity = 0.1;
+        }
+      } else {
+        instructionEl.style.textShadow = 'none';
+        instructionEl.style.opacity = 0.1;
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    init();
+    frame();
+    </script>
+</body>
+</html>
