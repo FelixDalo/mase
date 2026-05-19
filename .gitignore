@@ -8,3 +8,13 @@ coverage/
 !.env.example
 
 .vercel
+.tmp/
+.claude/
+.agents/
+Copy/
+Screnshoots/
+copy-extracted.txt
+implementation_plan.md.resolved
+skills-lock.json
+Images/
+Icon set/

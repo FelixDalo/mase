@@ -1,20 +1,52 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Mase Consulting Group Website
 
-# Run and deploy your AI Studio app
+This repository contains the current one-page marketing site for Mase Consulting Group, built with React, TypeScript, and Vite.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/5597c95e-ce07-4ed6-a2b8-0f8226c82e07
+- React 19
+- TypeScript
+- Vite
+- Motion
+- Lucide React
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
+## Run locally
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Start the dev server:
    `npm run dev`
+3. Build for production:
+   `npm run build`
+4. Run a type-check:
+   `npm run lint`
+
+## Project structure
+
+- `src/App.tsx`
+  Thin application shell. It renders the current page entry.
+- `src/pages/HomePage.tsx`
+  The page composition for the one-page site.
+- `src/sections/`
+  Major homepage sections such as About, Services, Industries, Approach, and Contact.
+- `src/components/`
+  Reusable UI components such as `Hero`, `Navigation`, footer, icons, and shared text/motion helpers.
+- `src/content/siteContent.ts`
+  Central source for homepage copy, service data, industry data, and section text.
+- `src/index.css`
+  Global and section styling. This is still monolithic and is the main remaining structural cleanup candidate.
+
+## Content editing
+
+For most routine client content changes, start in:
+
+- `src/content/siteContent.ts`
+- `src/components/ui/footer-7.tsx`
+
+See `docs/content-map.md` for a more explicit field-by-field guide.
+
+## Notes
+
+- The site currently ships as a single-page experience.
+- Earlier multi-variation route logic has been removed from the app shell.
+- Vite uses `index.html` as the entry point at the project root.

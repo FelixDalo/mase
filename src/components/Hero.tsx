@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { InteractiveGrid } from './InteractiveGrid';
+import { heroContent } from '../content/siteContent';
 
 export function Hero() {
   const [showSub, setShowSub] = useState(false);
@@ -8,7 +9,7 @@ export function Hero() {
   const [showRule, setShowRule] = useState(false);
   const [showIndicator, setShowIndicator] = useState(true);
 
-  const headlineText = "Where strategy meets delivery.";
+  const headlineText = heroContent.headline;
   const words = headlineText.split(' ');
   const imageRef = useRef<HTMLDivElement>(null);
 
@@ -63,7 +64,7 @@ export function Hero() {
       <InteractiveGrid />
       <div className="hero-content">
         <div className="hero-section-label">
-          STRATEGIC ADVISORY · TECHNOLOGY & DIGITAL TRANSFORMATION
+          {heroContent.label}
         </div>
         
         <h1 className="hero-headline" id="hero-headline">
@@ -87,12 +88,12 @@ export function Hero() {
         </h1>
 
         <p className={`hero-subtext ${showSub ? 'animate' : ''}`}>
-          Mase Consulting Group works with executives and transformation leaders across Africa to turn technology strategy into measurable business outcomes — without the overhead of a large firm.
+          {heroContent.description}
         </p>
 
         <div className={`hero-ctas ${showCta ? 'animate' : ''}`}>
-          <a href="#contact" className="btn-primary">Send an enquiry</a>
-          <a href="#services" className="btn-outline">What we do &rarr;</a>
+          <a href={heroContent.primaryCtaHref} className="btn-primary">{heroContent.primaryCtaLabel}</a>
+          <a href={heroContent.secondaryCtaHref} className="btn-outline">{heroContent.secondaryCtaLabel}</a>
         </div>
       </div>
 
@@ -106,7 +107,7 @@ export function Hero() {
           height: 'clamp(320px, 48vh, 480px)',
           marginBottom: '-80px',
           zIndex: 20,
-          backgroundImage: 'url(https://images.unsplash.com/photo-1758519289074-9de36003622b?fit=crop&crop=faces)',
+          backgroundImage: `url(${heroContent.imageUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}

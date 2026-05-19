@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(tasklist *)",
-      "PowerShell(Get-Process *)",
-      "Bash(npm run *)"
-    ]
-  }
-}
