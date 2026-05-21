@@ -11,6 +11,7 @@ type FormState = {
   phone: string;
   areaOfInterest: string;
   message: string;
+  honeypot: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -22,6 +23,7 @@ const emptyForm: FormState = {
   phone: '',
   areaOfInterest: '',
   message: '',
+  honeypot: '',
 };
 
 export function ContactSection() {
@@ -49,6 +51,7 @@ export function ContactSection() {
           phone: form.phone,
           area_of_interest: form.areaOfInterest,
           message: form.message,
+          website: form.honeypot,
         }),
       });
 
@@ -134,6 +137,19 @@ export function ContactSection() {
             rows={5}
             value={form.message}
             onChange={handleChange}
+          />
+        </label>
+
+        {/* Honeypot — hidden from real users, bots fill it in */}
+        <label style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0 }} aria-hidden="true">
+          Website
+          <input
+            type="text"
+            name="honeypot"
+            value={form.honeypot}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
           />
         </label>
 

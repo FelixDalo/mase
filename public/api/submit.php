@@ -5,6 +5,12 @@ require_once __DIR__ . '/config.php';
 
 $input = json_decode(file_get_contents('php://input'), true);
 
+// Honeypot check — bots fill this in, real users never see it
+if (!empty($input['website'])) {
+    echo json_encode(['success' => true]);
+    exit;
+}
+
 $name           = htmlspecialchars(trim($input['name'] ?? ''));
 $organisation   = htmlspecialchars(trim($input['organisation'] ?? ''));
 $email          = filter_var(trim($input['email'] ?? ''), FILTER_VALIDATE_EMAIL);
