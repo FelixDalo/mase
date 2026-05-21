@@ -13,6 +13,10 @@ export function ServicesSection() {
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
 
+  const handleLearnMore = (slug: string) => {
+    window.sessionStorage.setItem(activeServiceStorageKey, slug);
+  };
+
   useEffect(() => {
     const applyActiveServiceFromLocation = () => {
       const hashMatch = window.location.hash.match(/^#services\/([a-z-]+)$/);
@@ -109,9 +113,16 @@ export function ServicesSection() {
                         </span>
                       ))}
                     </div>
-                    <a href={servicesContent.learnMoreHref} className="service-panel-cta">
+                    <Link
+                      to={`/services#${service.slug}`}
+                      className="service-panel-cta"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLearnMore(service.slug);
+                      }}
+                    >
                       {servicesContent.learnMoreLabel}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </button>

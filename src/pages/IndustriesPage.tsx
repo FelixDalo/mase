@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import type { CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { Navigation } from '../components/Navigation';
 import { Footer7 } from '../components/ui/footer-7';
@@ -37,44 +36,47 @@ export function IndustriesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.72, ease: revealEase }}
           >
-            <div className="page-hero-breadcrumb">
-              <Link to="/">Home</Link>
-              <span>/</span>
-              <span>Industries</span>
-            </div>
             <h1>{industriesContent.title}</h1>
             <p>{industriesContent.description}</p>
           </motion.div>
         </section>
 
-        <section className="industries-detail-section">
-          <div className="industry-grid industries-grid-layout">
-            {industries.map((industry, index) => (
-              <motion.article
-                id={toSlug(industry.title)}
-                className="industry-item"
-                key={industry.title}
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.18 }}
-                transition={{
-                  duration: shouldReduceMotion ? 0.01 : 0.68,
-                  delay: shouldReduceMotion ? 0 : index * 0.045,
-                  ease: revealEase,
-                }}
-                style={{ '--industry-image': `url(${industry.image})` } as CSSProperties}
-              >
-                <div className="industry-item-meta">
-                  <span className="industry-item-index">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="industry-item-kicker">Industry</span>
+        <section className="ind-stack">
+          {industries.map((industry, i) => (
+            <article
+              key={industry.title}
+              id={toSlug(industry.title)}
+              className="ind-card"
+              style={{ '--i': i } as CSSProperties}
+            >
+              <div className="ind-card-tab">
+                <span className="ind-card-tab-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="ind-card-tab-label">{industry.title}</span>
+              </div>
+
+              <div className="ind-card-body">
+                <div
+                  className="ind-card-image"
+                  role="img"
+                  aria-label={industry.title}
+                  style={{ backgroundImage: `url(${industry.image})` }}
+                />
+                <div className="ind-card-content">
+                  <motion.div
+                    className="ind-card-inner"
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: shouldReduceMotion ? 0.01 : 0.68, ease: revealEase }}
+                  >
+                    <h2 className="ind-card-title">{industry.title}</h2>
+                    <p className="ind-card-text">{industry.text}</p>
+                    <a href="#contact" className="sp-cta">Contact us</a>
+                  </motion.div>
                 </div>
-                <div className="industry-item-body">
-                  <h2>{industry.title}</h2>
-                  <p>{industry.text}</p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+              </div>
+            </article>
+          ))}
         </section>
 
         <section className="page-cta-section">
@@ -86,8 +88,11 @@ export function IndustriesPage() {
             transition={{ duration: shouldReduceMotion ? 0.01 : 0.68, ease: revealEase }}
           >
             <h2>Ready to start a conversation?</h2>
-            <p>We support organisations across sectors where technology, operating model and delivery decisions carry real weight.</p>
-            <a href="/#contact" className="btn-primary">Get in touch</a>
+            <p>
+              We support organisations across sectors where technology, operating model and delivery
+              decisions carry real weight.
+            </p>
+            <a href="#contact" className="btn-primary">Contact us</a>
           </motion.div>
         </section>
 

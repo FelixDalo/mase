@@ -69,6 +69,7 @@ export const servicesContent = {
 
 export const services = [
   {
+    slug: 'digital-transformation',
     title: 'Technology & Digital Transformation',
     text:
       'We help organisations shape, mobilise and deliver digital and technology transformation with confidence, aligning strategy, architecture, delivery governance and business outcomes.',
@@ -81,6 +82,7 @@ export const services = [
     ],
   },
   {
+    slug: 'data-and-ai',
     title: 'Data & AI',
     text:
       'We help organisations turn data into insight, automation and measurable value by defining data strategy, strengthening governance and identifying high-impact AI use cases.',
@@ -93,6 +95,7 @@ export const services = [
     ],
   },
   {
+    slug: 'cloud-solutions',
     title: 'Cloud, Platforms & Enterprise Solutions',
     text:
       'We help clients modernise core technology foundations, improve scalability and enable more agile operations through cloud, platform and infrastructure advisory.',
@@ -105,6 +108,7 @@ export const services = [
     ],
   },
   {
+    slug: 'cyber-security',
     title: 'Cyber Security & Digital Risk',
     text:
       'We help organisations strengthen resilience, protect digital assets and improve confidence in technology-enabled change.',
@@ -117,6 +121,7 @@ export const services = [
     ],
   },
   {
+    slug: 'operational-modelling',
     title: 'Operating Model, People & Change',
     text:
       'We help organisations embed transformation by aligning people, process, governance, culture and adoption.',
@@ -126,6 +131,89 @@ export const services = [
       'Organisational Transformation',
       'Enterprise Change Management',
       'Leadership and Culture Enablement',
+    ],
+  },
+] as const;
+
+export const servicesDetailed = [
+  {
+    slug: 'digital-transformation',
+    title: 'Technology & Digital Transformation',
+    sidebarLabel: 'Technology & Digital',
+    description:
+      'We help organisations shape, mobilise and deliver digital and technology transformation with confidence, aligning strategy, architecture, delivery governance and business outcomes.',
+    capabilities: [
+      'Technology Strategy & CIO Advisory',
+      'Digital Transformation Strategy',
+      'Agile Delivery & Transformation PMO',
+      'Enterprise Architecture & Solution Design',
+      'Technology Delivery Assurance & Quality Engineering',
+      'Change Management & Transformation Enablement',
+      'Delivery Mobilisation and Governance',
+    ],
+  },
+  {
+    slug: 'data-and-ai',
+    title: 'Data & AI',
+    sidebarLabel: 'Data & AI',
+    description:
+      'We help organisations turn data into insight, automation and measurable value by defining data strategy, strengthening governance and identifying high-impact AI use cases.',
+    capabilities: [
+      'Data & AI Strategy',
+      'Data Governance & Management',
+      'Data Platforms & Engineering',
+      'Business Intelligence & Analytics',
+      'AI Use Case Discovery and Prioritisation',
+      'Predictive Analytics and Decision Support',
+      'AI Operating Model and Adoption',
+    ],
+  },
+  {
+    slug: 'cloud-solutions',
+    title: 'Cloud, Platforms & Enterprise Solutions',
+    sidebarLabel: 'Cloud & Platforms',
+    description:
+      'We help clients modernise core technology foundations, improve scalability and enable more agile operations through cloud, platform and infrastructure advisory.',
+    capabilities: [
+      'Cloud Transformation Advisory',
+      'Enterprise Platform Advisory',
+      'Infrastructure Modernisation',
+      'Systems Integration Advisory',
+      'Digital Workplace Enablement',
+      'Platform Delivery and Deployment',
+      'Managed Technology Advisory',
+    ],
+  },
+  {
+    slug: 'cyber-security',
+    title: 'Cyber Security & Digital Risk',
+    sidebarLabel: 'Cyber Security',
+    description:
+      'We help organisations strengthen resilience, protect digital assets and improve confidence in technology-enabled change.',
+    capabilities: [
+      'Cyber Security Strategy',
+      'Vulnerability Assessments',
+      'Digital Risk & Governance',
+      'Cyber Resilience & Preparedness',
+      'Cloud and Infrastructure Security Advisory',
+      'Security Awareness and Training',
+      'Risk Remediation Roadmaps',
+    ],
+  },
+  {
+    slug: 'operational-modelling',
+    title: 'Operating Model, People & Change',
+    sidebarLabel: 'People & Change',
+    description:
+      'We help organisations embed transformation by aligning people, process, governance, culture and adoption.',
+    capabilities: [
+      'Target Operating Model Design',
+      'Organisational Transformation',
+      'Enterprise Change Management',
+      'Leadership and Culture Enablement',
+      'Workforce and Capability Transformation',
+      'Training and Adoption Support',
+      'Transformation Communications',
     ],
   },
 ] as const;

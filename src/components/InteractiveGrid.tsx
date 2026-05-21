@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 
-export function InteractiveGrid() {
+type InteractiveGridProps = {
+  variant?: 'hero' | 'section';
+};
+
+export function InteractiveGrid({ variant = 'hero' }: InteractiveGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -47,26 +51,29 @@ export function InteractiveGrid() {
       return Math.pow(fade, 1.2);
     }
 
+    const getCellFade = (x: number, y: number) =>
+      variant === 'section' ? 1 : diagonalFade(x, y);
+
     const handleResize = () => init();
     window.addEventListener('resize', handleResize);
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
       mouseActive = true;
     };
-    const handleMouseLeave = () => { mouseActive = false; };
-    const handleClick = (e: MouseEvent) => {
+    const handlePointerLeave = () => { mouseActive = false; };
+    const handlePointerDown = (e: PointerEvent) => {
       if (!canvas) return;
       const rect = canvas.getBoundingClientRect();
       ripples.push({ x: e.clientX - rect.left, y: e.clientY - rect.top, r: 0, a: 0.7 });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('click', handleClick);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerleave', handlePointerLeave);
+    window.addEventListener('pointerdown', handlePointerDown);
 
     let animationFrameId: number;
 
@@ -85,7 +92,7 @@ export function InteractiveGrid() {
           const cx = x + SQ / 2;
           const cy = y + SQ / 2;
 
-          const fade = diagonalFade(cx, cy);
+          const fade = getCellFade(cx, cy);
           if (fade < 0.005) continue;
 
           const n = noise(x, y, time);
@@ -124,11 +131,14 @@ export function InteractiveGrid() {
           alpha = Math.min(alpha, 1) * pulse;
 
           if (alpha > 0.008) {
-            ctx.fillStyle = `rgba(29,106,90,${alpha * 0.12})`;
+            const fillStrength = variant === 'section' ? 0.16 : 0.12;
+            const strokeStrength = variant === 'section' ? 1.18 : 1;
+
+            ctx.fillStyle = `rgba(29,106,90,${alpha * fillStrength})`;
             ctx.fillRect(x + 1, y + 1, SQ - 2, SQ - 2);
 
             const grad = ctx.createRadialGradient(cx, cy, 2, cx, cy, SQ * 1.0);
-            grad.addColorStop(0, `rgba(29,106,90,${alpha})`);
+            grad.addColorStop(0, `rgba(29,106,90,${Math.min(alpha * strokeStrength, 1)})`);
             grad.addColorStop(1, `rgba(29,106,90,0)`);
             ctx.strokeStyle = grad;
             ctx.lineWidth = 1.3;
@@ -171,12 +181,12 @@ export function InteractiveGrid() {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('click', handleClick);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerleave', handlePointerLeave);
+      window.removeEventListener('pointerdown', handlePointerDown);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [variant]);
 
   return (
     <canvas
