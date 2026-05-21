@@ -32,8 +32,8 @@ const defaultSections = [
     links: [
       { name: 'Home', href: '#' },
       { name: 'About', href: '#about' },
-      { name: 'Services', href: '#services' },
-      { name: 'Industries', href: '#industries' },
+      { name: 'Services', href: '/services' },
+      { name: 'Industries', href: '/industries' },
       { name: 'Approach', href: '#approach' },
       { name: 'Contact', href: '#contact' },
     ],

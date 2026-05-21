@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const location = useLocation();
 
-  const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'services', label: 'Services' },
-    { id: 'industries', label: 'Industries' },
-    { id: 'approach', label: 'Approach' },
-  ];
+  const sectionIds = ['about', 'approach'];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
-      const sections = navItems
-        .map(({ id }) => document.getElementById(id))
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
         .filter((section): section is HTMLElement => Boolean(section));
       const probeLine = window.innerHeight * 0.35;
 
@@ -46,7 +43,7 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -56,30 +53,47 @@ export function Navigation() {
     }
   }, [menuOpen]);
 
+  const isServicesActive = location.pathname === '/services';
+  const isIndustriesActive = location.pathname === '/industries';
+
   return (
     <>
       <nav id="nav" className={scrolled ? 'scrolled' : ''}>
-        <a href="#" className="nav-logo" aria-label="Mase Consulting Group">
+        <Link to="/" className="nav-logo" aria-label="Mase Consulting Group">
           <img src="/Images/mase_logo_v1_header_v2.png" alt="Mase Consulting Group Logo" />
-        </a>
+        </Link>
 
         <div className="nav-links-wrapper">
           <div className="nav-links">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={activeSection === item.id ? 'active' : ''}
-                onClick={() => setActiveSection(item.id)}
-              >
-                {item.label}
-              </a>
-            ))}
+            <a
+              href="/#about"
+              className={activeSection === 'about' ? 'active' : ''}
+            >
+              About
+            </a>
+            <Link
+              to="/services"
+              className={isServicesActive ? 'active' : ''}
+            >
+              Services
+            </Link>
+            <Link
+              to="/industries"
+              className={isIndustriesActive ? 'active' : ''}
+            >
+              Industries
+            </Link>
+            <a
+              href="/#approach"
+              className={activeSection === 'approach' ? 'active' : ''}
+            >
+              Approach
+            </a>
           </div>
         </div>
 
         <div className="nav-right">
-          <a href="#contact" className="nav-cta">Contact Us</a>
+          <a href="/#contact" className="nav-cta">Contact Us</a>
         </div>
 
         <button
@@ -94,26 +108,38 @@ export function Navigation() {
 
       <div id="mobile-nav-overlay" className={`mobile-nav-overlay ${menuOpen ? 'active' : ''}`}>
         <button className="close-btn" id="close-btn" onClick={() => setMenuOpen(false)}>Close</button>
-        {navItems.map((item) => (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            className={`mobile-nav-link ${activeSection === item.id ? 'active' : ''}`}
-            onClick={() => {
-              setActiveSection(item.id);
-              setMenuOpen(false);
-            }}
-          >
-            {item.label}
-          </a>
-        ))}
         <a
-          href="#contact"
+          href="/#about"
+          className={`mobile-nav-link ${activeSection === 'about' ? 'active' : ''}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          About
+        </a>
+        <Link
+          to="/services"
+          className={`mobile-nav-link ${isServicesActive ? 'active' : ''}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          Services
+        </Link>
+        <Link
+          to="/industries"
+          className={`mobile-nav-link ${isIndustriesActive ? 'active' : ''}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          Industries
+        </Link>
+        <a
+          href="/#approach"
+          className={`mobile-nav-link ${activeSection === 'approach' ? 'active' : ''}`}
+          onClick={() => setMenuOpen(false)}
+        >
+          Approach
+        </a>
+        <a
+          href="/#contact"
           className="mobile-nav-cta"
-          onClick={() => {
-            setActiveSection('contact');
-            setMenuOpen(false);
-          }}
+          onClick={() => setMenuOpen(false)}
         >
           Contact Us
         </a>
