@@ -1,4 +1,6 @@
 Options -MultiViews
 RewriteEngine On
+RewriteRule ^robots\.txt$ - [L]
+RewriteRule ^sitemap\.xml$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.html [QSA,L]
