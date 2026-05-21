@@ -20,6 +20,8 @@ export function ServicesPage() {
       meta.content =
         'Explore Mase Consulting Group services across digital transformation, data & AI, cloud platforms, cyber security and operating model change.';
     }
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical) canonical.href = 'https://maseconsultinggroup.com/services';
     window.scrollTo(0, 0);
   }, []);
 

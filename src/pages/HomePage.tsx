@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Hero } from '../components/Hero';
 import { BrandStatement } from '../components/BrandStatement';
 import { Navigation } from '../components/Navigation';
@@ -10,6 +11,11 @@ import { IndustriesSection } from '../sections/IndustriesSection';
 import { ServicesSection } from '../sections/ServicesSection';
 
 export function HomePage() {
+  useEffect(() => {
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical) canonical.href = 'https://maseconsultinggroup.com/';
+  }, []);
+
   return (
     <div className="version1-page">
       <Navigation />

@@ -20,6 +20,8 @@ export function IndustriesPage() {
       meta.content =
         'Mase Consulting Group supports organisations across Government & Public Sector, Financial Services, Energy & Resources, Telecommunications & Media, Consumer & Retail, and Healthcare & Life Sciences.';
     }
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (canonical) canonical.href = 'https://maseconsultinggroup.com/industries';
     if (!window.location.hash) {
       window.scrollTo(0, 0);
     }
