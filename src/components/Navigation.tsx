@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const location = useLocation();
 
   const sectionIds = ['about', 'approach'];
 
@@ -43,7 +42,7 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname]);
+  }, []);
 
   useEffect(() => {
     if (menuOpen) {
@@ -52,9 +51,6 @@ export function Navigation() {
       document.body.style.overflow = '';
     }
   }, [menuOpen]);
-
-  const isServicesActive = location.pathname === '/services';
-  const isIndustriesActive = location.pathname === '/industries';
 
   return (
     <>
@@ -65,28 +61,12 @@ export function Navigation() {
 
         <div className="nav-links-wrapper">
           <div className="nav-links">
-            <a
-              href="/#about"
-              className={activeSection === 'about' ? 'active' : ''}
-            >
+            <a href="/#about" className={activeSection === 'about' ? 'active' : ''}>
               About
             </a>
-            <Link
-              to="/services"
-              className={isServicesActive ? 'active' : ''}
-            >
-              Services
-            </Link>
-            <Link
-              to="/industries"
-              className={isIndustriesActive ? 'active' : ''}
-            >
-              Industries
-            </Link>
-            <a
-              href="/#approach"
-              className={activeSection === 'approach' ? 'active' : ''}
-            >
+            <a href="/#services">Services</a>
+            <a href="/#industries">Industries</a>
+            <a href="/#approach" className={activeSection === 'approach' ? 'active' : ''}>
               Approach
             </a>
           </div>
@@ -115,20 +95,20 @@ export function Navigation() {
         >
           About
         </a>
-        <Link
-          to="/services"
-          className={`mobile-nav-link ${isServicesActive ? 'active' : ''}`}
+        <a
+          href="/#services"
+          className="mobile-nav-link"
           onClick={() => setMenuOpen(false)}
         >
           Services
-        </Link>
-        <Link
-          to="/industries"
-          className={`mobile-nav-link ${isIndustriesActive ? 'active' : ''}`}
+        </a>
+        <a
+          href="/#industries"
+          className="mobile-nav-link"
           onClick={() => setMenuOpen(false)}
         >
           Industries
-        </Link>
+        </a>
         <a
           href="/#approach"
           className={`mobile-nav-link ${activeSection === 'approach' ? 'active' : ''}`}

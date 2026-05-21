@@ -1,7 +1,11 @@
 import type { CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import { industries, industriesContent } from '../content/siteContent';
 import { revealEase } from '../lib/animation';
+
+const toSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export function IndustriesSection() {
   const shouldReduceMotion = useReducedMotion();
@@ -47,7 +51,12 @@ export function IndustriesSection() {
           >
             <div className="industry-item-meta">
               <span className="industry-item-index">{String(index + 1).padStart(2, '0')}</span>
-              <span className="industry-item-kicker">Industry</span>
+              <Link
+                to={`/industries#${toSlug(industry.title)}`}
+                className="industry-item-kicker"
+              >
+                See more
+              </Link>
             </div>
             <div className="industry-item-body">
               <h3>{industry.title}</h3>

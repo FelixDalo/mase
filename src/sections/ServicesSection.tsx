@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'motion/react';
 import {
   activeServiceStorageKey,
@@ -63,6 +64,9 @@ export function ServicesSection() {
             </div>
             <div className="services-header-right">
               <p>{servicesContent.description}</p>
+              <Link to="/services" className="service-panel-cta">
+                Explore all services
+              </Link>
             </div>
           </div>
         </motion.div>

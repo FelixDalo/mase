@@ -8,6 +8,9 @@ import { ContactSection } from '../sections/ContactSection';
 import { industries, industriesContent } from '../content/siteContent';
 import { revealEase } from '../lib/animation';
 
+const toSlug = (title: string) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 export function IndustriesPage() {
   const shouldReduceMotion = useReducedMotion();
 
@@ -18,7 +21,9 @@ export function IndustriesPage() {
       meta.content =
         'Mase Consulting Group supports organisations across Government & Public Sector, Financial Services, Energy & Resources, Telecommunications & Media, Consumer & Retail, and Healthcare & Life Sciences.';
     }
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   return (
@@ -46,6 +51,7 @@ export function IndustriesPage() {
           <div className="industry-grid industries-grid-layout">
             {industries.map((industry, index) => (
               <motion.article
+                id={toSlug(industry.title)}
                 className="industry-item"
                 key={industry.title}
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
