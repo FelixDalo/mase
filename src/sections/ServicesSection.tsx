@@ -116,6 +116,7 @@ export function ServicesSection() {
                     <Link
                       to={`/services#${service.slug}`}
                       className="service-panel-cta"
+                      aria-label={`Learn more about ${service.title}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLearnMore(service.slug);

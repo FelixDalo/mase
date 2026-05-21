@@ -44,7 +44,7 @@ export function CharacterScrubText({ text, className = '' }: CharacterScrubTextP
   }, []);
 
   return (
-    <span ref={textRef} className={`character-scrub-text ${className}`} aria-label={text}>
+    <span ref={textRef} className={`character-scrub-text ${className}`} role="img" aria-label={text}>
       {words.map((word, wordIndex) => {
         const priorCharacterCount = words.slice(0, wordIndex).join(' ').length + (wordIndex > 0 ? 1 : 0);
 

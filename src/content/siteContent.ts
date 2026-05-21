@@ -240,37 +240,37 @@ export const industries = [
     title: 'Government & Public Sector',
     text:
       'Supporting digital government, citizen services, operating model change and secure technology modernisation.',
-    image: 'https://images.unsplash.com/photo-1763917801917-2909e21feb5e?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-government.jpg',
   },
   {
     title: 'Financial Services',
     text:
       'Helping banks, insurers and financial institutions modernise platforms, strengthen data capability, manage risk and improve customer journeys.',
-    image: 'https://images.unsplash.com/photo-1726065235203-4368c41c6f19?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-financial.jpg',
   },
   {
     title: 'Energy & Resources',
     text:
       'Supporting asset-intensive organisations with operational intelligence, data, digital platforms and transformation delivery.',
-    image: 'https://images.unsplash.com/photo-1619697101606-7c092a8e6281?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-energy.jpg',
   },
   {
     title: 'Telecommunications & Media',
     text:
       'Helping telecoms and media organisations modernise platforms, improve digital services and enable data-driven growth.',
-    image: 'https://images.unsplash.com/photo-1582193607281-dafb7941640f?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-telecom.jpg',
   },
   {
     title: 'Consumer & Retail',
     text:
       'Helping organisations improve customer experience, digital operations, data insight and scalable technology platforms.',
-    image: 'https://images.unsplash.com/photo-1601600576337-c1d8a0d1373c?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-retail.jpg',
   },
   {
     title: 'Healthcare & Life Sciences',
     text:
       'Supporting secure digital transformation, data governance, operating model change and service improvement.',
-    image: 'https://images.unsplash.com/photo-1759768313058-02218212c9f5?auto=format&fit=crop&w=1400&q=80',
+    image: '/Images/industry-healthcare.jpg',
   },
 ] as const;
 
