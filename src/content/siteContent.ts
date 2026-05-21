@@ -238,36 +238,42 @@ export const industriesContent = {
 export const industries = [
   {
     title: 'Government & Public Sector',
+    kicker: 'Explore Government',
     text:
       'Supporting digital government, citizen services, operating model change and secure technology modernisation.',
     image: '/Images/industry-government.jpg',
   },
   {
     title: 'Financial Services',
+    kicker: 'Explore Financial Services',
     text:
       'Helping banks, insurers and financial institutions modernise platforms, strengthen data capability, manage risk and improve customer journeys.',
     image: '/Images/industry-financial.jpg',
   },
   {
     title: 'Energy & Resources',
+    kicker: 'Explore Energy & Resources',
     text:
       'Supporting asset-intensive organisations with operational intelligence, data, digital platforms and transformation delivery.',
     image: '/Images/industry-energy.jpg',
   },
   {
     title: 'Telecommunications & Media',
+    kicker: 'Explore Telecoms & Media',
     text:
       'Helping telecoms and media organisations modernise platforms, improve digital services and enable data-driven growth.',
     image: '/Images/industry-telecom.jpg',
   },
   {
     title: 'Consumer & Retail',
+    kicker: 'Explore Consumer & Retail',
     text:
       'Helping organisations improve customer experience, digital operations, data insight and scalable technology platforms.',
     image: '/Images/industry-retail.jpg',
   },
   {
     title: 'Healthcare & Life Sciences',
+    kicker: 'Explore Healthcare',
     text:
       'Supporting secure digital transformation, data governance, operating model change and service improvement.',
     image: '/Images/industry-healthcare.jpg',

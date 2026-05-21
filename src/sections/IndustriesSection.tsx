@@ -55,7 +55,7 @@ export function IndustriesSection() {
                 to={`/industries#${toSlug(industry.title)}`}
                 className="industry-item-kicker"
               >
-                See more
+                {industry.kicker}
               </Link>
             </div>
             <div className="industry-item-body">

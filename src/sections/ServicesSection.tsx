@@ -6,6 +6,7 @@ import {
   serviceSlugMap,
   services,
   servicesContent,
+  servicesDetailed,
 } from '../content/siteContent';
 import { revealEase } from '../lib/animation';
 
@@ -116,13 +117,12 @@ export function ServicesSection() {
                     <Link
                       to={`/services#${service.slug}`}
                       className="service-panel-cta"
-                      aria-label={`Learn more about ${service.title}`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLearnMore(service.slug);
                       }}
                     >
-                      {servicesContent.learnMoreLabel}
+                      Explore {servicesDetailed[index].sidebarLabel}
                     </Link>
                   </div>
                 </div>
