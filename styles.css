@@ -1,4 +1,4 @@
-
+﻿
 :root {
   --charcoal: #1C1C1E;
   --deep-graphite: #2C2C2E;
@@ -2688,7 +2688,7 @@ nav.scrolled .hamburger span {
   scroll-margin-top: var(--space-xl);
 }
 
-/* ── SHARED PAGE STYLES (Services + Industries) ── */
+/* -- SHARED PAGE STYLES (Services + Industries) -- */
 
 .page-hero-section {
   position: relative;
@@ -2784,7 +2784,7 @@ nav.scrolled .hamburger span {
   padding: var(--space-xl) max(64px, 8vw) var(--space-2xl);
 }
 
-/* ── SERVICES SPLIT-SCREEN LAYOUT ── */
+/* -- SERVICES SPLIT-SCREEN LAYOUT -- */
 
 .sp-split {
   position: relative;
@@ -2996,7 +2996,7 @@ nav.scrolled .hamburger span {
   transform: translateY(-1px);
 }
 
-/* ── RESPONSIVE ── */
+/* -- RESPONSIVE -- */
 @media (max-width: 900px) {
   .sp-split {
     grid-template-columns: 1fr;
@@ -3086,7 +3086,7 @@ nav.scrolled .hamburger span {
   }
 }
 
-/* ── INDUSTRIES STACKED STICKY CARDS ── */
+/* -- INDUSTRIES STACKED STICKY CARDS -- */
 
 .ind-stack {
   position: relative;
@@ -3266,248 +3266,134 @@ nav.scrolled .hamburger span {
   }
 }
 
-/* Clean review layouts for the services and industries pages */
-.simple-page-section {
-  position: relative;
-  z-index: 2;
-  background:
-    linear-gradient(90deg, rgba(29, 106, 90, 0.04), transparent 34%),
-    var(--charcoal);
-  padding: var(--space-2xl) max(64px, 8vw);
+/* Normal-scroll review mode for Services + Industries.
+   Keeps the richer section styling, but removes sticky panels and scroll-stacked cards. */
+.version1-page[data-page="services"] .sp-split {
+  display: block;
+  background-color: var(--deep-graphite);
 }
 
-.simple-page-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.45;
-  background-image:
-    linear-gradient(rgba(29, 106, 90, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(29, 106, 90, 0.12) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(circle at 12% 8%, #000 0, transparent 28%);
+.version1-page[data-page="services"] .sp-left {
+  position: relative;
+  top: auto;
+  height: auto;
+  min-height: 0;
+  justify-content: flex-start;
+  border-right: 0;
+  border-bottom: 1px solid rgba(232, 230, 224, 0.1);
 }
 
-.simple-page-grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(48px, 7vw, 112px);
-  align-items: start;
+.version1-page[data-page="services"] .sp-left-inner {
   max-width: 1380px;
   margin: 0 auto;
+  padding: var(--space-xl) max(64px, 8vw);
 }
 
-.simple-page-aside {
-  position: sticky;
-  top: 116px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.version1-page[data-page="services"] .sp-left-animated {
+  max-width: 680px;
 }
 
-.simple-eyebrow {
-  margin: 0 0 var(--space-sm);
+.version1-page[data-page="services"] .sp-left-intro {
+  max-width: 48ch;
+  color: var(--mid-grey);
+  font-style: normal;
+}
+
+.version1-page[data-page="services"] .sp-mobile-grid {
+  display: none !important;
+}
+
+.version1-page[data-page="services"] .sp-block {
+  min-height: 0;
+  justify-content: flex-start;
+  padding: clamp(48px, 7vw, 96px) max(64px, 8vw);
+}
+
+.version1-page[data-page="services"] .sp-block-header {
+  display: block;
+  max-width: 720px;
+  margin-bottom: var(--space-lg);
+}
+
+.version1-page[data-page="services"] .sp-block-num {
+  color: var(--teal);
   font-size: var(--type-label);
   font-weight: 300;
-  line-height: 1;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--teal);
 }
 
-.simple-page-aside h2 {
-  margin: 0 0 var(--space-copy);
-  color: var(--warm-white);
-  font-size: clamp(30px, 3.8vw, 56px);
+.version1-page[data-page="services"] .sp-block-title {
+  max-width: 720px;
+  font-size: clamp(30px, 4vw, 56px);
   font-weight: 400;
-  letter-spacing: -0.04em;
   line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
-.simple-page-aside p {
-  max-width: 35ch;
-  margin: 0;
-  color: var(--mid-grey);
-  font-size: var(--type-body-md);
-  font-weight: 300;
-  line-height: 1.75;
+.version1-page[data-page="services"] .sp-block-desc {
+  max-width: 58ch;
 }
 
-.simple-anchor-list {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  max-width: 390px;
-  margin-top: var(--space-lg);
-  border-top: 1px solid rgba(232, 230, 224, 0.12);
+.version1-page[data-page="services"] .sp-capabilities {
+  max-width: 920px;
 }
 
-.simple-anchor-list a {
-  display: flex;
-  align-items: center;
-  min-height: 48px;
-  padding: 14px 0;
-  color: var(--mid-grey);
-  border-bottom: 1px solid rgba(232, 230, 224, 0.12);
-  font-size: var(--type-label);
-  font-weight: 300;
-  letter-spacing: 0.12em;
-  line-height: 1.35;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    color var(--duration-fast) var(--easing-standard),
-    transform var(--duration-fast) var(--easing-standard);
+.version1-page[data-page="industries"] .ind-card {
+  position: relative;
+  top: auto;
+  z-index: 1;
+  min-height: 0;
+  box-shadow: none;
 }
 
-.simple-anchor-list a:hover {
-  color: var(--warm-white);
-  transform: translateX(6px);
+.version1-page[data-page="industries"] .ind-card-tab {
+  height: 72px;
 }
 
-.simple-service-list,
-.simple-industry-list {
-  display: grid;
-  gap: var(--space-copy);
+.version1-page[data-page="industries"] .ind-card-body {
+  min-height: clamp(420px, 48vw, 620px);
 }
 
-.simple-service-card,
-.simple-industry-card {
-  scroll-margin-top: 112px;
+.version1-page[data-page="industries"] .ind-card-image {
+  min-height: 320px;
 }
 
-.simple-service-card {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: clamp(22px, 3vw, 42px);
-  padding: clamp(28px, 4vw, 52px);
-  background-color: var(--deep-graphite);
-  border: 1px solid rgba(232, 230, 224, 0.1);
-  transition:
-    border-color var(--duration-medium) var(--easing-standard),
-    transform var(--duration-medium) var(--easing-standard),
-    background-color var(--duration-medium) var(--easing-standard);
-}
-
-.simple-service-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(29, 106, 90, 0.44);
-  background-color: #202022;
-}
-
-.simple-card-num {
-  display: inline-flex;
-  color: var(--teal);
-  font-size: var(--type-label);
-  font-weight: 300;
-  letter-spacing: 0.18em;
-  line-height: 1;
-}
-
-.simple-service-card h2,
-.simple-industry-card h2 {
-  margin: 0 0 var(--space-sm);
-  color: var(--warm-white);
-  font-size: clamp(24px, 2.6vw, 38px);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.12;
-}
-
-.simple-service-card p,
-.simple-industry-card p {
-  max-width: 62ch;
-  margin: 0;
-  color: var(--mid-grey);
-  font-size: var(--type-body-md);
-  font-weight: 300;
-  line-height: 1.75;
-}
-
-.simple-chip-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: var(--space-copy) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.simple-chip-list li {
-  padding: 8px 12px;
-  color: var(--warm-white);
-  background-color: rgba(245, 244, 240, 0.045);
-  border: 1px solid rgba(232, 230, 224, 0.11);
-  font-size: 12px;
-  font-weight: 300;
-  line-height: 1.35;
-}
-
-.simple-industry-card {
-  display: grid;
-  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 52px);
-  align-items: stretch;
-  padding: clamp(22px, 3vw, 34px);
-  background-color: var(--deep-graphite);
-  border: 1px solid rgba(232, 230, 224, 0.1);
-}
-
-.simple-industry-card img {
-  width: 100%;
-  min-height: 210px;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(0.82) contrast(0.96);
-}
-
-.simple-industry-card > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(6px, 1.5vw, 18px) 0;
-}
-
-.simple-industry-card .simple-card-num {
-  margin-bottom: var(--space-sm);
-}
-
-@media (max-width: 1024px) {
-  .simple-page-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+@media (max-width: 900px) {
+  .version1-page[data-page="services"] .sp-left {
+    display: block;
   }
 
-  .simple-page-aside {
-    position: relative;
+  .version1-page[data-page="services"] .sp-left-inner,
+  .version1-page[data-page="services"] .sp-block {
+    padding-right: max(24px, 5vw);
+    padding-left: max(24px, 5vw);
+  }
+
+  .version1-page[data-page="services"] .sp-block {
+    min-height: 0;
+  }
+
+  .version1-page[data-page="industries"] .ind-card {
     top: auto;
+    min-height: 0;
   }
 
-  .simple-page-aside p,
-  .simple-anchor-list {
-    max-width: 680px;
+  .version1-page[data-page="industries"] .ind-card-body {
+    min-height: 0;
   }
 }
 
 @media (max-width: 767px) {
-  .simple-page-section {
+  .version1-page[data-page="services"] .sp-left-inner {
+    padding: var(--space-lg) 24px;
+  }
+
+  .version1-page[data-page="services"] .sp-block {
     padding: var(--space-xl) 24px;
   }
 
-  .simple-service-card,
-  .simple-industry-card {
-    grid-template-columns: 1fr;
-  }
-
-  .simple-industry-card img {
-    min-height: 190px;
-  }
-
-  .simple-chip-list li {
-    font-size: 11px;
+  .version1-page[data-page="industries"] .ind-card-tab {
+    height: 56px;
   }
 }
 
@@ -4227,3 +4113,4 @@ body.menu-open {
 .brand-char-space {
   width: 0.3em;
 }
+

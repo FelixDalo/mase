@@ -801,8 +801,8 @@ const initEntrances = () => {
     setupPageHero(gsap);
     setupRevealOnScroll(gsap, ScrollTrigger);
     setupStaggerGroups(gsap, ScrollTrigger);
-    setupServicesPageBlocks(gsap, ScrollTrigger);
-    setupIndustriesPageCards(gsap, ScrollTrigger);
+    // Services and industries now use normal document flow; keep only the
+    // shared reveal pattern instead of page-specific scroll mechanics.
     window.setTimeout(() => { var _a; return (_a = ScrollTrigger.refresh) === null || _a === void 0 ? void 0 : _a.call(ScrollTrigger); }, 250);
 };
 const initGsapEnhancements = () => {
