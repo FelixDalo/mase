@@ -3338,6 +3338,130 @@ nav.scrolled .hamburger span {
   max-width: 920px;
 }
 
+.services-range-section {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(32px, 5vw, 72px);
+  padding: var(--space-xl) max(64px, 8vw);
+  background-color: var(--charcoal);
+  border-bottom: 1px solid rgba(232, 230, 224, 0.1);
+}
+
+.services-range-header {
+  max-width: 460px;
+}
+
+.services-range-kicker {
+  margin: 0 0 var(--space-sm);
+  color: var(--teal);
+  font-size: var(--type-label);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.services-range-header h2 {
+  margin: 0 0 var(--space-sm);
+  color: var(--warm-white);
+  font-size: clamp(28px, 3.3vw, 46px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.services-range-header p {
+  margin: 0;
+  color: var(--mid-grey);
+  font-size: var(--type-body-md);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.services-range-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid rgba(232, 230, 224, 0.12);
+}
+
+.services-range-card {
+  display: flex;
+  min-height: 156px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-copy);
+  padding: 20px;
+  color: var(--warm-white);
+  text-decoration: none;
+  border-right: 1px solid rgba(232, 230, 224, 0.12);
+  background-color: rgba(245, 244, 240, 0.025);
+  transition:
+    background-color var(--duration-medium) var(--easing-standard),
+    color var(--duration-medium) var(--easing-standard),
+    transform var(--duration-medium) var(--easing-standard);
+}
+
+.services-range-card:last-child {
+  border-right: 0;
+}
+
+.services-range-card span {
+  color: var(--teal);
+  font-size: var(--type-label);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+}
+
+.services-range-card strong {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.services-range-card:hover {
+  color: var(--deep-graphite);
+  background-color: var(--warm-white);
+  transform: translateY(-3px);
+}
+
+.version1-page[data-page="services"] .sp-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: clamp(32px, 5vw, 76px);
+  align-items: center;
+}
+
+.version1-page[data-page="services"] .sp-block-header,
+.version1-page[data-page="services"] .sp-block > .reveal-on-scroll:not(.sp-service-visual-block) {
+  grid-column: 1;
+}
+
+.sp-service-visual-block {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 100%;
+  margin: 0;
+  border: 1px solid rgba(232, 230, 224, 0.1);
+  overflow: hidden;
+  background-color: rgba(245, 244, 240, 0.04);
+}
+
+.sp-service-visual-block img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(0.96);
+}
+
+.sp-block:nth-child(even) .sp-service-visual-block img {
+  aspect-ratio: 1 / 1;
+}
+
 .version1-page[data-page="industries"] .ind-card {
   position: relative;
   top: auto;
@@ -3359,6 +3483,26 @@ nav.scrolled .hamburger span {
 }
 
 @media (max-width: 900px) {
+  .services-range-section {
+    grid-template-columns: 1fr;
+    padding-right: max(24px, 5vw);
+    padding-left: max(24px, 5vw);
+  }
+
+  .services-range-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-range-card {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(232, 230, 224, 0.12);
+  }
+
+  .services-range-card:last-child {
+    border-bottom: 0;
+  }
+
   .version1-page[data-page="services"] .sp-left {
     display: block;
   }
@@ -3371,6 +3515,23 @@ nav.scrolled .hamburger span {
 
   .version1-page[data-page="services"] .sp-block {
     min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .version1-page[data-page="services"] .sp-block-header,
+  .version1-page[data-page="services"] .sp-block > .reveal-on-scroll:not(.sp-service-visual-block),
+  .sp-service-visual-block {
+    grid-column: 1;
+  }
+
+  .sp-service-visual-block {
+    grid-row: auto;
+    max-width: 620px;
+  }
+
+  .sp-service-visual-block img,
+  .sp-block:nth-child(even) .sp-service-visual-block img {
+    aspect-ratio: 16 / 10;
   }
 
   .version1-page[data-page="industries"] .ind-card {
